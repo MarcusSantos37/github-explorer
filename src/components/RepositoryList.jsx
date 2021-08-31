@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 
 import { RepositoryItem } from "./RepositoryItem";
 
-import "../styles/issues.scss";
+import "../styles/repositories.scss";
 
 export function RepositoryList() {
-  const [issues, setIssues] = useState([]);
+  const [repositories, setRepositories] = useState([]);
 
-  console.log("issues", issues);
+  console.log("repositories", repositories);
 
   useEffect(() => {
-    fetch("https://github.com/facebook/react/issues")
+    fetch("https://api.github.com/orgs/rocketseat/repos")
       .then((response) => response.json())
-      .then((data) => setIssues(data));
+      .then((data) => setRepositories(data));
   }, []);
 
   return (
     <section className="repository-list">
       <h1>Lista de repositórios</h1>
       <ul>
-        {issues.map((repository) => {
+        {repositories.map((repository) => {
           return (
             <RepositoryItem key={repository.name} repository={repository} />
           );
